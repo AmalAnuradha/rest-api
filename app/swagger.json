@@ -1,0 +1,111 @@
+openapi: 3.0.0
+info:
+  title: 'My Rest Api Project'
+  version: '0.1'
+paths:
+  '/api/v1/users/{id}':
+    get:
+      tags:
+        - User
+      operationId: 'App\Http\Controllers\UserController::showUser'
+      parameters:
+        -
+          name: id
+          in: path
+          description: 'ID of user to return'
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: 'get a user'
+    put:
+      tags:
+        - User
+      operationId: 'App\Http\Controllers\UserController::updateUser'
+      parameters:
+        -
+          name: id
+          in: path
+          description: 'ID of user to update'
+          required: true
+          schema:
+            type: integer
+            format: int64
+        -
+          name: request
+          in: query
+          description: 'data of user to update'
+          required: true
+          schema:
+            type: array
+            items:
+              type: string
+            default: available
+      responses:
+        '200':
+          description: 'update a user'
+    delete:
+      tags:
+        - User
+      operationId: 'App\Http\Controllers\UserController::delete'
+      parameters:
+        -
+          name: id
+          in: path
+          description: 'ID of user to delete'
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: 'delete a user'
+  /api/v1/users:
+    get:
+      tags:
+        - User
+      operationId: 'App\Http\Controllers\UserController::showUsers'
+      responses:
+        '200':
+          description: 'get all users'
+    post:
+      tags:
+        - User
+      operationId: 'App\Http\Controllers\UserController::addUser'
+      parameters:
+        -
+          name: request
+          in: query
+          description: 'data of user to add'
+          required: true
+          schema:
+            type: array
+            items:
+              type: string
+            default: available
+      responses:
+        '200':
+          description: 'add a user'
+components:
+  schemas:
+    User:
+      properties:
+        id:
+          description: 'The User id'
+          type: integer
+        firstname:
+          description: 'The User firstname'
+          type: string
+        lastname:
+          description: 'The User lastname'
+          type: string
+        mobile:
+          description: 'The User mobile'
+          type: string
+        email:
+          description: 'The User email'
+          type: string
+      type: object
+  parameters: {  }
